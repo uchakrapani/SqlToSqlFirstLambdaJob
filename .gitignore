@@ -1,0 +1,77 @@
+# Ignore Visual Studio temporary files, build results, and
+# build directories
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (Mono Auto Generated)
+mono_crash.*
+
+# User-specific files (VS Code)
+.vscode/
+
+# User-specific files (VS Code, .NET Core)
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/settings.json
+
+# Mono auto generated files
+mono_crash.*
+
+# VS 2019 auto generated files
+.vs/
+
+# Backup & report files from converting an old project file
+# to a newer version of the IDE (.NET Upgrade)
+UpgradeLog*.XML
+UpgradeLog*.htm
+ServiceFabricBackup/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VsCode log file
+.vscode/
+
+# Temporary files
+.tmp
+
+# Folders for auto-generated files
+obj/
+bin/
+
+# Test result files
+TestResults/
+
+# Build log files
+*.log
+
+# NPM dependencies
+node_modules/
+
+# JetBrains Rider
+.idea/
+.idea_modules/
+
+# SQL Server files
+*.mdf
+*.ldf
+*.ndf
+
+# Python
+*.py[cod]
+__pycache__/
+*.so
+.env
+.venv
