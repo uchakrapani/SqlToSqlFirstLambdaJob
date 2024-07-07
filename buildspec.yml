@@ -11,4 +11,4 @@ phases:
       - dotnet publish -c Release -o ./publish
   post_build:
     commands:
-      - aws lambda update-function-code --function-name MyFirstAWSLambda --zip-file fileb://./publish/MyFirstAWSLambda.zip
+      - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb://./publish/MyFirstLambda.zip
