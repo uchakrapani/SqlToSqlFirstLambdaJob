@@ -22,8 +22,7 @@ phases:
       - cd AWSLambda1/bin/Release/net6.0/linux-x64
       - zip -r MyFirstLambda.zip .
       - mv MyFirstLambda.zip ../../../..   # Move the zip file to the project root
-      - cd ../../../../../..   # Navigate back to the root of the project
-      - ls -la   # List files in the project directory to verify the zip file's presence
+      - ls -la ../../../..   # Verify the zip file is in the root directory
       - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb://MyFirstLambda.zip
 
 artifacts:
