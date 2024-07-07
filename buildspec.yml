@@ -11,4 +11,5 @@ phases:
       - dotnet publish -c Release -r linux-x64 -o ./publish
   post_build:
     commands:
+      - ls -la ./publish  # Optional: List files in the publish directory for debugging
       - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb://./publish/MyFirstLambda.zip
