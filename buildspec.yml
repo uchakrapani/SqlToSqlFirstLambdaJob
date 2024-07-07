@@ -20,10 +20,10 @@ phases:
   post_build:
     commands:
       - cd AWSLambda1/bin/Release/net6.0/linux-x64
-      - zip -r MyFirstLambda.zip .   # Create a zip file of the published contents
+      - zip -r MyFirstLambda.zip .
       - mv MyFirstLambda.zip ../../../..   # Move the zip file to the project root
       - cd ../../../../../..   # Navigate back to the root of the project
-      - ls -la   # List files in the project directory to verify the zip file location
+      - ls -la   # List files in the project directory to verify the zip file's presence
       - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb://MyFirstLambda.zip
 
 artifacts:
