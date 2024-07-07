@@ -23,7 +23,8 @@ phases:
       - zip -r MyFirstLambda.zip .
       - mv MyFirstLambda.zip ../../../..   # Move the zip file to the project root
       - ls -la ../../../..   # Verify the zip file is in the root directory
-      - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb://MyFirstLambda.zip
+      - ABSOLUTE_PATH=$(realpath ../../../MyFirstLambda.zip)  # Get absolute path of the zip file
+      - aws lambda update-function-code --function-name MyFirstLambda --zip-file "fileb://${ABSOLUTE_PATH}"
 
 artifacts:
   files:
