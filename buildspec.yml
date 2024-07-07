@@ -4,12 +4,28 @@ phases:
   install:
     runtime-versions:
       dotnet: 6.0
+
+  pre_build:
+    commands:
+      - echo "Installing .NET version 6.0 ..."
+      - test -f "global.json" && echo "Using provided global.json" || dotnet new globaljson --sdk-version $DOTNET_6_GLOBAL_JSON_SDK_VERSION --roll-forward feature
+
   build:
     commands:
       - dotnet restore
       - dotnet build -c Release
       - dotnet publish -c Release -r linux-x64 -o ./publish
+      - ls -la ./publish   # Verify contents of the publish directory
+
   post_build:
     commands:
-      - ls -la ./publish  # Optional: List files in the publish directory for debugging
-      - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb://./publish/MyFirstLambda.zip
+      - cd AWSLambda1/bin/Release/net6.0/linux-x64
+      - zip -r MyFirstLambda.zip .   # Create a zip file of the published contents
+      - mv MyFirstLambda.zip ../../../..   # Move the zip file to the project root
+      - cd ../../../../../..   # Navigate back to the root of the project
+      - ls -la   # List files in the project directory to verify the zip file location
+      - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb://MyFirstLambda.zip
+
+artifacts:
+  files:
+    - '**/*'
