@@ -21,8 +21,8 @@ phases:
     commands:
       - cd AWSLambda1/bin/Release/net6.0/linux-x64
       - zip -r MyFirstLambda.zip .
-      - mv MyFirstLambda.zip ../../../..   # Move the zip file to the project root
-      - ls -la ../../../..   # Verify the zip file is in the root directory
+      - mv MyFirstLambda.zip ../../../../../..   # Move the zip file to the project root
+      - ls -la ../../../../../..   # Verify the zip file is in the root directory
       - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb:///codebuild/output/src3429131877/src/github.com/uchakrapani/SqlToSqlFirstLambdaJob/AWSLambda1/bin/Release/net6.0/linux-x64/MyFirstLambda.zip
 
 artifacts:
