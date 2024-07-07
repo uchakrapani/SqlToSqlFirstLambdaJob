@@ -3,13 +3,12 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      dotnet: 3.1
+      dotnet: 6.0
   build:
     commands:
       - dotnet restore
-      - dotnet build --configuration Release
-      - dotnet lambda package --configuration Release --output-package output.zip
-
-artifacts:
-  files:
-    - output.zip
+      - dotnet build -c Release
+      - dotnet publish -c Release -o ./publish
+  post_build:
+    commands:
+      - aws lambda update-function-code --function-name MyFirstAWSLambda --zip-file fileb://./publish/MyFirstAWSLambda.zip
