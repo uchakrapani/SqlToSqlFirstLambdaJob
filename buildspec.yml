@@ -4,27 +4,21 @@ phases:
   install:
     runtime-versions:
       dotnet: 6.0
-
   pre_build:
     commands:
-      - echo "Installing .NET version 6.0 ..."
-      - test -f "global.json" && echo "Using provided global.json" || dotnet new globaljson --sdk-version $DOTNET_6_GLOBAL_JSON_SDK_VERSION --roll-forward feature
-
+      - echo Restore started on `date`
+      - dotnet restore
   build:
     commands:
-      - dotnet restore
-      - dotnet build -c Release
-      - dotnet publish -c Release -r linux-x64 -o ./publish
-      - ls -la ./publish   # Verify contents of the publish directory
-
+      - echo Build started on `date`
+      - dotnet build --configuration Release
+      - dotnet publish -c Release -o ./publish
   post_build:
     commands:
-      - cd AWSLambda1/bin/Release/net6.0/linux-x64
+      - echo Packaging artifact
+      - cd ./publish
       - zip -r MyFirstLambda.zip .
-      - mv MyFirstLambda.zip ../../../../../..   # Move the zip file to the project root
-      - ls -la ../../../../../..   # Verify the zip file is in the root directory
-      - aws lambda update-function-code --function-name MyFirstLambda --zip-file fileb:///codebuild/output/src3429131877/src/github.com/uchakrapani/SqlToSqlFirstLambdaJob/AWSLambda1/bin/Release/net6.0/linux-x64/MyFirstLambda.zip
-
+      - aws s3 cp MyFirstLambda.zip s3://your-lambda-artifacts-bucket/MyFirstLambda.zip
 artifacts:
   files:
-    - '**/*'
+    - MyFirstLambda.zip
